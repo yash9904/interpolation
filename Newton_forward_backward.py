@@ -1,10 +1,10 @@
-data = []
-n = int(input('How many values do you want to enter?'))
+data = list()
 
-for i in range(n):
-    data.append(input('x, y = '))
+with open('input_data.txt') as f:
+    for line in f:
+        data.append(list(map(float, line.strip().split())))
 
-data = [list(map(float, ele.strip().split())) for ele in data]
+n = len(data)
 
 def fact(x, nums = 1):
     factorial = 1
@@ -64,18 +64,15 @@ def newton(val, forward = True):
         
         return k
     
+print('x     y')
+for (i,j) in data:
+    print(i, j)
 
-for i in data:
-    print(i)
 
-ans = 1
+num = float(input('What do you want to predict?'))
 
-while ans:
-    num = float(input('What do you want to predict?'))
-    if num < data[len(data)//2][0]:
-        print(newton(num))
-    else:
-        print(newton(num, False))
-    
-    ans = input('Wanna go again?(1/0)')
-
+if num < data[len(data)//2][0]:
+    print(newton(num))
+else:
+    print(newton(num, False))
+  
